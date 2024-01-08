@@ -14,7 +14,7 @@ This package provides a set of decorators and utilities to simplify the creation
 To use these decorators, ensure that you have FastAPI installed in your environment. If not, you can install it using pip:
 
 ```bash
-pip install imp
+pip install fastapi-imp
 ```
 
 Then, include the provided code in your project or package it accordingly.

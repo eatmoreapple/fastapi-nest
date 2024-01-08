@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="imp",
+    name="fastapi-imp",
     version="0.0.1",
     author="eatmoreapple",
     description="class base view for fastapi",
