@@ -1,0 +1,7 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel",
+    "fastapi"
+]
+build-backend = "setuptools.build_meta"
