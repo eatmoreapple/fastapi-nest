@@ -7,7 +7,7 @@ setup(
     version=__version__,
     author="eatmoreapple",
     description="class base view for fastapi",
-    url="https://github.com/eatmoreapple/imp",
+    url="https://github.com/eatmoreapple/fastapi_imp",
     packages=find_packages(),
     author_email="eatmoreorange@gmail.com",
     install_requires=[
