@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-from imp import __version__
+from fastapi_imp import __version__
 
 setup(
     name="fastapi-imp",
