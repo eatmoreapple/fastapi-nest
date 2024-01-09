@@ -12,6 +12,9 @@ RouteMeta = namedtuple("RouteMeta", ("method", "path", "args", "kwargs"))
 
 
 def is_depends(instance: object) -> bool:
+    """
+    Check if an object is a Depends instance
+    """
     return isinstance(instance, Depends)
 
 
@@ -21,10 +24,17 @@ _ROUTER_META_KEY = "_router_meta_"
 
 
 def is_controller(instance: object) -> bool:
+    """
+    Check if an object is a controller
+    """
     return hasattr(instance, _CONTROLLER_ROUTER_KEY)
 
 
 class Controller:
+    """
+    Decorate a class as a controller
+    """
+
     def __init__(self, *args, **kwargs):
         self._router = APIRouter(*args, **kwargs)
 
@@ -36,14 +46,17 @@ class Controller:
 
         controller_key = f"_{kls.__name__}__self"
 
+        # Get all the fields that are Depends instances
         field_depends = inspect.getmembers(kls, is_depends)
 
+        # Make sure the controller key is not already used
         assert controller_key not in [field_name for field_name, _ in field_depends]
 
         annotations = kls.__annotations__
 
         params = []
 
+        # Add all the Depends instances as parameters
         for field_name, field_value in field_depends:
             assert (
                     controller_key != field_name
@@ -66,6 +79,7 @@ class Controller:
 
         depend_signature = inspect.Signature(params)
 
+        # Add all the methods as routes
         for method_name, method in inspect.getmembers(kls, inspect.isfunction):
             meta: RouteMeta | None = getattr(method, _ROUTER_META_KEY, None)
             if not meta:
@@ -78,9 +92,16 @@ class Controller:
 
             @wraps(method)
             def router_handler(*args, **kwargs):
+                """
+                Closure to handle the route
+                """
+                # Get the controller instance
                 _controller = kwargs.pop(controller_key)
+
+                # Set all the Depends instances as attributes on the controller
                 for field_name, _ in field_depends:
                     setattr(_controller, field_name, kwargs.pop(field_name))
+                # Call the method
                 return method(self=_controller, *args, **kwargs)
 
             router_handler.__signature__ = method_signature.replace(parameters=parameters)  # type: ignore[attr-defined]
@@ -110,6 +131,9 @@ def as_api_router(_controller: object) -> APIRouter:
 
 
 class Method:
+    """
+    Decorate a function as a route with a specific HTTP method
+    """
     allowed_methods = [
         "GET",
         "POST",
@@ -147,6 +171,9 @@ class Method:
         return decorator
 
     def _create_route(self, path: str, func: Callable, *args, **kwargs):
+        """
+        Create a route from a path and function
+        """
         @wraps(func)
         def inner(*inner_args, **inner_kwargs):
             return func(*inner_args, **inner_kwargs)
