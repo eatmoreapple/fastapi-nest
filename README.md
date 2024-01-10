@@ -26,7 +26,7 @@ Then, include the provided code in your project or package it accordingly.
 To create a new controller, define a class and decorate it with `@controller`:
 
 ```python
-from fastapi_imp import controller
+from fastapi_controller import controller
 
 @controller()
 class MyController:
@@ -38,7 +38,7 @@ class MyController:
 Use the provided HTTP method decorators to define route handlers within your controller:
 
 ```python
-from fastapi_imp import controller, get, post
+from fastapi_controller import controller, get, post
 
 @controller()
 class MyController:
@@ -58,7 +58,7 @@ Use `Depends` to inject dependencies into your route handlers:
 
 ```python
 from fastapi import Depends
-from fastapi_imp import controller, get
+from fastapi_controller import controller, get
 
 def get_current_user():
     # Logic to get the current user
@@ -82,7 +82,7 @@ To add your controller's routes to a FastAPI app, use the `as_api_router` utilit
 
 ```python
 from fastapi import FastAPI
-from fastapi_imp import as_api_router
+from fastapi_controller import as_api_router
 from my_controller import MyController
 
 app = FastAPI()

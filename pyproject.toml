@@ -1,12 +1,12 @@
 [project]
-name = "fastapi-imp"
+name = "fastapi-controller"
 version = "0.1.0"  # 将这里的版本号替换为你的实际版本号
 description = "class base view for fastapi"
 authors = [{name = "eatmoreapple", email = "eatmoreorange@gmail.com"}]
 readme = "README.md"  # 确保你的项目中有一个 README.md 文件
 
 [project.urls]
-homepage = "https://github.com/eatmoreapple/fastapi_imp"
+homepage = "https://github.com/eatmoreapple/fastapi-controller"
 
 [build-system]
 requires = ["setuptools", "wheel"]

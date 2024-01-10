@@ -1,5 +1,5 @@
-from .imp import Controller, controller, as_api_router
-from .imp import get, post, patch, put, delete, head, trace, options
+from .controller import Controller, controller, as_api_router
+from .controller import get, post, patch, put, delete, head, trace, options
 
 __version__ = "0.0.2"
 
