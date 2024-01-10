@@ -4,17 +4,18 @@ version = "0.1.0"  # 将这里的版本号替换为你的实际版本号
 description = "class base view for fastapi"
 authors = [{ name = "eatmoreapple", email = "eatmoreorange@gmail.com" }]
 readme = "README.md"  # 确保你的项目中有一个 README.md 文件
+dependencies = [
+    "fastapi",
+]
+
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
 
 [project.urls]
 homepage = "https://github.com/eatmoreapple/fastapi-controller"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.dependencies]
-python = "^3.11"
-fastapi = ""
-
-[tool.poetry]
-include = ["fastapi_controller"]
+documentation = "https://github.com/eatmoreapple/fastapi-controller#readme"
+repository = "https://github.com/eatmoreapple/fastapi-controller"
+issues = "https://github.com/eatmoreapple/fastapi-controller/issues"
