@@ -1,6 +1,6 @@
 [project]
 name = "fastapi-nest"
-version = "0.1.0"  # 将这里的版本号替换为你的实际版本号
+version = "0.1.1"  # 将这里的版本号替换为你的实际版本号
 description = "class base view for fastapi"
 authors = [{ name = "eatmoreapple", email = "eatmoreorange@gmail.com" }]
 readme = "README.md"  # 确保你的项目中有一个 README.md 文件
