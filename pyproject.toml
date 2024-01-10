@@ -9,9 +9,16 @@ readme = "README.md"  # 确保你的项目中有一个 README.md 文件
 homepage = "https://github.com/eatmoreapple/fastapi-controller"
 
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[tool.setuptools]
-install_requires = ["fastapi"]
-packages = ["fastapi_controller"]
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = ""
+
+[tool.poetry]
+include = ["fastapi_controller"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
