@@ -90,19 +90,36 @@ class Controller:
                 depend_signature.parameters.values()
             )
 
-            @wraps(method)
-            def router_handler(*args, **kwargs):
-                """
-                Closure to handle the route
-                """
-                # Get the controller instance
-                _controller = kwargs.pop(controller_key)
+            is_coroutine_function = inspect.iscoroutinefunction(method)
 
-                # Set all the Depends instances as attributes on the controller
-                for field_name, _ in field_depends:
-                    setattr(_controller, field_name, kwargs.pop(field_name))
-                # Call the method
-                return method(self=_controller, *args, **kwargs)
+            if is_coroutine_function:
+                @wraps(method)
+                async def router_handler(*args, **kwargs):
+                    """
+                    Closure to handle the route
+                    """
+                    # Get the controller instance
+                    _controller = kwargs.pop(controller_key)
+
+                    # Set all the Depends instances as attributes on the controller
+                    for field_name, _ in field_depends:
+                        setattr(_controller, field_name, kwargs.pop(field_name))
+                    # Call the method
+                    return await method(self=_controller, *args, **kwargs)
+            else:
+                @wraps(method)
+                def router_handler(*args, **kwargs):
+                    """
+                    Closure to handle the route
+                    """
+                    # Get the controller instance
+                    _controller = kwargs.pop(controller_key)
+
+                    # Set all the Depends instances as attributes on the controller
+                    for field_name, _ in field_depends:
+                        setattr(_controller, field_name, kwargs.pop(field_name))
+                    # Call the method
+                    return method(self=_controller, *args, **kwargs)
 
             router_handler.__signature__ = method_signature.replace(parameters=parameters)  # type: ignore[attr-defined]
 
@@ -174,9 +191,16 @@ class Method:
         """
         Create a route from a path and function
         """
-        @wraps(func)
-        def inner(*inner_args, **inner_kwargs):
-            return func(*inner_args, **inner_kwargs)
+        is_coroutine_function = inspect.iscoroutinefunction(func)
+
+        if is_coroutine_function:
+            @wraps(func)
+            async def inner(*inner_args, **inner_kwargs):
+                return await func(*inner_args, **inner_kwargs)
+        else:
+            @wraps(func)
+            def inner(*inner_args, **inner_kwargs):
+                return func(*inner_args, **inner_kwargs)
 
         meta = RouteMeta(method=self.method, path=path, args=args, kwargs=kwargs)
         setattr(inner, _ROUTER_META_KEY, meta)
