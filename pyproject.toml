@@ -1,5 +1,5 @@
 [project]
-name = "fastapi-controller"
+name = "fastapi-nest"
 version = "0.1.0"  # 将这里的版本号替换为你的实际版本号
 description = "class base view for fastapi"
 authors = [{ name = "eatmoreapple", email = "eatmoreorange@gmail.com" }]
@@ -15,7 +15,7 @@ build-backend = "setuptools.build_meta"
 
 
 [project.urls]
-homepage = "https://github.com/eatmoreapple/fastapi-controller"
-documentation = "https://github.com/eatmoreapple/fastapi-controller#readme"
-repository = "https://github.com/eatmoreapple/fastapi-controller"
-issues = "https://github.com/eatmoreapple/fastapi-controller/issues"
+homepage = "https://github.com/eatmoreapple/fastapi-nest"
+documentation = "https://github.com/eatmoreapple/fastapi-nest#readme"
+repository = "https://github.com/eatmoreapple/fastapi-nest"
+issues = "https://github.com/eatmoreapple/fastapi-nest/issues"
