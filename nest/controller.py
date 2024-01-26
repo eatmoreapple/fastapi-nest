@@ -176,7 +176,7 @@ class Method:
     def __call__(self, path_or_func: Callable, *args, **kwargs):
         ...
 
-    def __call__(self, path_or_func: str | Callable, *args, **kwargs):
+    def __call__(self, path_or_func: str | Callable, /, *args, **kwargs):
         if callable(path_or_func):
             # If the first argument is a function, act like the original decorator
             return self._create_route("", path_or_func, *args, **kwargs)
